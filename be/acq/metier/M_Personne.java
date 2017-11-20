@@ -5,6 +5,8 @@ import be.acq.clavier.*;
 public class M_Personne {
 	private Personne p;
 	public M_Personne() {}
+	public Personne getPersonne() {return this.p;}
+	public void setPersonne(Personne p) {this.p = p;}
 	
 	public void connexion() {
 		Object utilisateur;
@@ -22,13 +24,16 @@ public class M_Personne {
 		utilisateur= dao_p.selectFromConnection(p_nom, p_prenom, p_mdp);
 		if(utilisateur!=null) {
 			if(utilisateur.getClass().equals(Membre.class)) {
-				
+				M_Membre m = new M_Membre();
+				m.setMembre((Membre)utilisateur);
 			}
 			else if (utilisateur.getClass().equals(Responsable.class)) {
-				
+				M_Responsable r = new M_Responsable();
+				r.setResponsable((Responsable)utilisateur);
 			}
 			else if (utilisateur.getClass().equals(Tresorier.class)) {
-				
+				M_Tresorier t = new M_Tresorier();
+				t.setTresorier((Tresorier)utilisateur);
 			}
 			else {
 				p = (Personne)utilisateur;
@@ -55,7 +60,9 @@ public class M_Personne {
 		}
 		while(choix !=1 && choix!=2);
 		if(choix ==1) {
-			
+			DAO_Membre dao_m = new DAO_Membre(CovoiturageCon.getInstance());
+			/*M_Membre m = new M_Membre();
+			m.setMembre()*/
 		}
 	}
 	public void inscriptionMembre() {
