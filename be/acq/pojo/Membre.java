@@ -3,6 +3,7 @@ package be.acq.pojo;
 import java.util.Date;
 
 public class Membre extends Personne {
+	private int idMembre;
 	private double solde;
 	private Categorie cat;
 	
@@ -18,9 +19,11 @@ public class Membre extends Personne {
 		this.cat = cat;
 	}
 	//Getter
+	public int getId() {return this.idMembre;}
 	public double getSolde() {return this.solde;}
 	public Categorie setCategorie() {return this.cat;}
 	//Setter
 	public void setSolde(double solde) {this.solde = solde;}
 	public void setCategorie(Categorie cat) {this.cat = cat;}
+	public void setId(int id) {this.idMembre = id;}
 }

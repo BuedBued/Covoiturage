@@ -1,6 +1,7 @@
 package be.acq.pojo;
 import java.util.Date;
 public class Personne {
+	int idPersonne;
 	String nom;
 	String prenom;
 	Date dateNaissance;
@@ -17,12 +18,14 @@ public class Personne {
 	}
 	
 	//Getters
+	public int getId() {return this.idPersonne;}
 	public String getNom() {return this.nom;}
 	public String getPrenom() {return this.prenom;}
 	public Date getDate() {return this.dateNaissance;}
 	public String getTelephone() {return this.telephone;}
 	public String getEmail() {return this.email;}
 	//Setters
+	public void getId(int id) {this.idPersonne = id;}
 	public void setNom(String nom) {this.nom = nom;}
 	public void setPrenom(String prenom) {this.prenom = prenom;}
 	public void setDate(Date dateNaissance) {this.dateNaissance = dateNaissance;}
