@@ -5,12 +5,45 @@ public class DAO_Personne extends DAO<Personne> {
 	public DAO_Personne(Connection conn){
 		super(conn);
 	}
-	public boolean create(Personne obj){
-		return false;
+	public boolean create(Personne o){
+		boolean b = false;
+		PreparedStatement stmt = null;
+		try {
+			//Preparation de la commande SQL
+			stmt = connect.prepareStatement("INSERT INTO Personne (nom,prenom,dateNaissance,telephone,mail) "
+					+ "VALUES (?,?,?,?,?)");
+			stmt.setString(1, o.getNom());
+			stmt.setString(2, o.getPrenom());
+			stmt.setDate(3,o.getDate());
+			stmt.setString(4, o.getTelephone());
+			stmt.setString(5, o.getEmail());
+			//Execution de la commande SQL
+			stmt.executeUpdate();
+			//Récupération de l'id
+			o.setId(stmt.getGeneratedKeys().getInt(1));
+			b = true;
+		}
+		catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return b;
 	}
 	
-	public boolean delete(Personne obj){
-		return false;
+	public boolean delete(Personne o){
+		boolean b = false;
+		PreparedStatement stmt = null;
+		try {
+			//Preparation de la commande SQL
+			stmt = connect.prepareStatement("DELETE FROM Personne WHERE idPersonne = ?");
+			stmt.setInt(1, o.getId());
+			//Execution de la commande SQL
+			stmt.executeUpdate();
+			b = true;
+		}
+		catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return b;
 	}
 	
 	public boolean update(Personne obj){

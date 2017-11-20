@@ -1,12 +1,12 @@
 package be.acq.pojo;
-import java.util.Date;
+import java.sql.Date;
 public class Personne {
-	int idPersonne;
-	String nom;
-	String prenom;
-	Date dateNaissance;
-	String telephone;
-	String email;
+	private int idPersonne;
+	private String nom;
+	private String prenom;
+	private Date dateNaissance;
+	private String telephone;
+	private String email;
 	
 	public Personne() {}
 	public Personne(String nom, String prenom, Date dateNaissance, String telephone, String email) {
@@ -25,7 +25,7 @@ public class Personne {
 	public String getTelephone() {return this.telephone;}
 	public String getEmail() {return this.email;}
 	//Setters
-	public void getId(int id) {this.idPersonne = id;}
+	public void setId(int id) {this.idPersonne = id;}
 	public void setNom(String nom) {this.nom = nom;}
 	public void setPrenom(String prenom) {this.prenom = prenom;}
 	public void setDate(Date dateNaissance) {this.dateNaissance = dateNaissance;}

@@ -1,5 +1,5 @@
 package be.acq.pojo;
-import java.util.Date;
+import java.sql.Date;
 
 public class Responsable extends Personne {
 	private Categorie cat;

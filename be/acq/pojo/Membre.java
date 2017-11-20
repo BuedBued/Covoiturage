@@ -1,6 +1,6 @@
 package be.acq.pojo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Membre extends Personne {
 	private int idMembre;
