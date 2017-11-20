@@ -8,14 +8,18 @@ public class DAO_Personne extends DAO<Personne> {
 	
 	public boolean create(Personne o){
 		boolean b = false;
+		
+		//Variables nécessaires pour la base de données
 		PreparedStatement stmt = null;
 		ResultSet res = null;
-		try {			
+		try {
+			//Test si la personne existe !
 			stmt = connect.prepareStatement("SELECT idPersonne FROM Personne WHERE nom = ? AND prenom = ?",
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			stmt.setString(1, o.getNom());
 			stmt.setString(2, o.getPrenom());
 			res = stmt.executeQuery();
+			//Si elle existe => Envoie d'un message dans la console et pas de création
 			if(res.first())
 				System.out.println("Cette personne est déjà inscrite");
 			else {
