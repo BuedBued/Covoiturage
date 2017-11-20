@@ -23,7 +23,7 @@ public class DAO_Personne extends DAO<Personne> {
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Personne WHERE idPersonne = " +id);
 			if(result.first()){
 				p = new Personne(result.getString("nom"),result.getString("prenom"), result.getDate("dateNaissance"),
-						result.getString("telephone"), result.getString("email"));
+						result.getString("telephone"), result.getString("mail"));
 			}
 			else
 				p = null;

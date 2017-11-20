@@ -8,7 +8,7 @@ public class CovoiturageCon{
 	private CovoiturageCon(){
 		try{
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-			String url = "jdbc:ucanaccess://./Ecole.accdb";
+			String url = "jdbc:ucanaccess://./Covoiturage.accdb";
 			instance = DriverManager.getConnection(url);
 		}
 		catch(ClassNotFoundException ex){
