@@ -1,5 +1,4 @@
 package be.acq.pojo;
-import java.sql.Date;
 
 public class Responsable extends Personne {
 	private Categorie cat;
@@ -8,7 +7,7 @@ public class Responsable extends Personne {
 		super();
 		this.cat = cat;
 	}
-	public Responsable(String nom, String prenom, Date date, String tel, String email, Categorie cat) 
+	public Responsable(String nom, String prenom, String date, String tel, String email, Categorie cat) 
 	{
 		super(nom,prenom,date,tel,email);
 		this.cat = cat;

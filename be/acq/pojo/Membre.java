@@ -1,7 +1,5 @@
 package be.acq.pojo;
 
-import java.sql.Date;
-
 public class Membre extends Personne {
 	private int idMembre;
 	private double solde;
@@ -13,7 +11,7 @@ public class Membre extends Personne {
 		this.solde = solde;
 		this.cat = cat;
 	}
-	public Membre(String nom, String prenom, Date date, String tel, String email, double solde, Categorie cat) {
+	public Membre(String nom, String prenom, String date, String tel, String email, double solde, Categorie cat) {
 		super(nom,prenom,date,tel,email);
 		this.solde = solde;
 		this.cat = cat;
