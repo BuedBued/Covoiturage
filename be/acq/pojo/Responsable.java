@@ -1,6 +1,7 @@
 package be.acq.pojo;
 
 public class Responsable extends Personne {
+	private int idResponsable;
 	private Categorie cat;
 	public Responsable() {super();}
 	public Responsable(Categorie cat) {
@@ -15,6 +16,8 @@ public class Responsable extends Personne {
 	
 	//Getter
 	public Categorie getCategorie() {return this.cat;}
+	public int getIdResponsable() {return this.idResponsable;}
 	//Setter
 	public void setCategorie(Categorie cat) {this.cat = cat;}
+	public void setIdResponsable(int id) {this.idResponsable = id;}
 }

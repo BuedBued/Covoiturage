@@ -108,4 +108,72 @@ public class DAO_Personne extends DAO<Personne> {
 		}
 		return p;
 	}
+	
+	public Personne selectFromConnection(String nom, String prenom, String mdp) {
+		Personne p;
+		try{
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Personne WHERE nom = " +nom+" AND "
+							+ "prenom = "+prenom+" AND mdp = "+mdp);
+			if(result.first()){
+				String p_nom = result.getString("nom");
+				String p_prenom = result.getString("prenom");
+				String p_date = result.getString("dateNaissance");
+				String p_tel = result.getString("telephone");
+				String p_mail = result.getString("mail");
+				int p_idPersonne = result.getInt("idPersonne");
+				DAO_Membre dao_m = new DAO_Membre(CovoiturageCon.getInstance());
+				Membre m = dao_m.findFromIdPersonne(p_idPersonne);
+				if(m!=null) {
+					m.setNom(p_nom);
+					m.setPrenom(p_prenom);
+					m.setDate(p_date);
+					m.setEmail(p_mail);
+					m.setTelephone(p_tel);
+					m.setId(p_idPersonne);
+					return m;
+				}
+				else {
+					DAO_Responsable dao_r = new DAO_Responsable(CovoiturageCon.getInstance());
+					Responsable r = dao_r.findFromIdPersonne(p_idPersonne);
+					if(r!=null) {
+						r.setNom(p_nom);
+						r.setPrenom(p_prenom);
+						r.setDate(p_date);
+						r.setEmail(p_mail);
+						r.setTelephone(p_tel);
+						r.setId(p_idPersonne);
+						return r;
+					}
+					else {
+						DAO_Tresorier dao_t = new DAO_Tresorier(CovoiturageCon.getInstance());
+						Tresorier t = dao_t.findFromIdPersonne(p_idPersonne);
+						if(t!=null) {
+							t.setNom(p_nom);
+							t.setPrenom(p_prenom);
+							t.setDate(p_date);
+							t.setEmail(p_mail);
+							t.setTelephone(p_tel);
+							t.setId(p_idPersonne);
+							return t;
+						}
+						else {
+							p = new Personne(result.getString("nom"),result.getString("prenom"), result.getString("dateNaissance"),
+									result.getString("telephone"), result.getString("mail"));
+							p.setId(result.getInt("idPersonne"));
+							return p;
+						}
+					}
+				}
+			}
+			else {
+				p = null;
+				return p;
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

@@ -6,6 +6,7 @@ public class Personne {
 	private String dateNaissance;
 	private String telephone;
 	private String email;
+	private String mdp;
 	
 	public Personne() {}
 	public Personne(String nom, String prenom, String dateNaissance, String telephone, String email) {
@@ -23,6 +24,7 @@ public class Personne {
 	public String getDate() {return this.dateNaissance;}
 	public String getTelephone() {return this.telephone;}
 	public String getEmail() {return this.email;}
+	public String getMDP() {return this.mdp;}
 	//Setters
 	public void setId(int id) {this.idPersonne = id;}
 	public void setNom(String nom) {this.nom = nom;}
@@ -30,4 +32,5 @@ public class Personne {
 	public void setDate(String dateNaissance) {this.dateNaissance = dateNaissance;}
 	public void setTelephone(String telephone) {this.telephone = telephone;}
 	public void setEmail(String email) {this.email = email;}
+	public void setMDP(String mdp) {this.mdp = mdp;}
 }
