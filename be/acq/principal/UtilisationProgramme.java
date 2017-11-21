@@ -1,4 +1,5 @@
-package be.acq.metier;
+package be.acq.principal;
+import be.acq.metier.*;
 import be.acq.clavier.*;
 
 public class UtilisationProgramme {
