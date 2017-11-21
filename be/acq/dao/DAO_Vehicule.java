@@ -69,25 +69,30 @@ public class DAO_Vehicule extends DAO<Vehicule>{
 		return retour;
 	}
 	
-	/*public ArrayList<Vehicule> selectionTousVehicule(){
+	public ArrayList<Vehicule> selectionTousVehicule(Balade b){
 		ArrayList<Vehicule> listVehicule = null;
 		PreparedStatement stmt = null;
 		ResultSet res = null;
 		try{
 			listVehicule = new ArrayList<Vehicule>();
-			stmt = connect.prepareStatement("SELECT * FROM Categorie",
+			stmt = connect.prepareStatement("SELECT maxPlace, v.idVehicule FROM Vehicule v INNER JOIN LigneCovoiturage l"
+					+ " ON v.idVehicule = l.idVehicule WHERE idBalade = ? AND maxPlace > (SELECT count(*) FROM "
+					+ "LigneCovoiturage WHERE idBalade = ? GROUP BY idVehicule) GROUP BY idVehicule",
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			stmt.setInt(1, b.getIdBalade());
+			stmt.setInt(2, b.getIdBalade());
 			res = stmt.executeQuery();
 			while(res.next()) {
-				Vehicule tmp_v = new Vehicule(res.getString("nomCategorie"));
-				tmp_c.setIdCategorie(res.getInt("idCategorie"));
-				listCategorie.add(tmp_c);
+				Vehicule tmp_v = new Vehicule();
+				tmp_v.setPlaceMax(res.getInt("maxPlace"));
+				tmp_v.setIdVehicule(res.getInt("idVehicule"));
+				listVehicule.add(tmp_v);
 			}
-			return listCategorie;
+			return listVehicule;
 		}
 		catch(SQLException e){
 			e.printStackTrace();
 			return null;
 		}
-	}*/
+	}
 }

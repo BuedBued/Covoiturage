@@ -50,4 +50,13 @@ public class M_Balade {
 		}
 		return bool;
 	}
+	public boolean inscrireCovoiturage(Membre m) {
+		boolean bool = false;
+		M_Vehicule mv = new M_Vehicule();
+		Vehicule choix = mv.selectionnerCovoiturage(b);
+		DAO_Balade dao_b = new DAO_Balade(CovoiturageCon.getInstance());
+		if(dao_b.inscriptionCovoiturage(b, choix, m))
+			bool = true;
+		return bool;
+	}
 }

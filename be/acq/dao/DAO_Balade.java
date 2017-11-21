@@ -88,4 +88,36 @@ public class DAO_Balade extends DAO<Balade>{
 	public Balade find(int id) {
 		return null;
 	}
+	
+	public boolean inscriptionCovoiturage(Balade b, Vehicule v, Membre m) {
+		boolean bool = false;
+		//Variables nécessaires pour la base de données
+		PreparedStatement stmt = null;
+		ResultSet res = null;
+		try {
+			//Test si le covoiturage existe !
+			stmt = connect.prepareStatement("SELECT * FROM LigneCovoiturage WHERE idBalade = ? AND idVehicule = ? "
+					+ "AND idMembre = ?",ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			stmt.setInt(1, b.getIdBalade());
+			stmt.setInt(2, v.getIdVehicule());
+			stmt.setInt(3, m.getIdMembre());
+			res = stmt.executeQuery();
+			//Si elle existe => Envoie d'un message dans la console et pas de création
+			if(res.first())
+				System.out.println("Vous êtes déjà inscrit");
+			else {
+				//Preparation de la commande SQL
+				stmt = connect.prepareStatement("INSERT INTO LigneCovoiturage (idBalade,idVehicule,idMembre) VALUES(?,?,?)");
+				stmt.setInt(1, b.getIdBalade());
+				stmt.setInt(2, v.getIdVehicule());
+				stmt.setInt(3, m.getIdMembre());
+				//Execution de la commande SQL
+				stmt.executeUpdate();
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return bool;
+	}
 }

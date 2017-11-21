@@ -41,8 +41,8 @@ public class M_Membre {
 		System.out.println("****************************");
 		System.out.println("Membre");
 		System.out.println("1. Payer son solde");
-		System.out.println("2. Poster disponibilité");
-		System.out.println("3. Consulter calendrier");
+		System.out.println("2. Chercher covoiturage");
+		System.out.println("3. Poster disponibilité");
 		System.out.println("4. Quitter");
 		int choix;
 		do {
@@ -57,7 +57,7 @@ public class M_Membre {
 			payerSolde();
 		}
 		else if(choix ==2) {
-			//posterDisponibilite();
+			chercherCovoiturage();
 		}
 		else if(choix ==3) {
 			consulterCalendrier();
@@ -75,10 +75,11 @@ public class M_Membre {
 		}
 	}
 	
-	/*public void inscriptionBalade() {
-		M_Vehicule v = new M_Vehicule();
-		v.posterDisponibilite();
-	}*/
+	public void chercherCovoiturage() {
+		M_Categorie c = new M_Categorie();
+		c.setCategorie(m.getCategorie());
+		c.afficherCalendrierCovoiturage(m);
+	}
 	
 	public void consulterCalendrier() {
 		M_Categorie c = new M_Categorie();
