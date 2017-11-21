@@ -7,4 +7,8 @@ public class M_Membre {
 	public M_Membre() {}
 	public Membre getMembre() {return this.m;}
 	public void setMembre(Membre m) {this.m = m;}
+	
+	public void inscriptionMembre() {
+		m.setSolde(20); //Cotisation annuelle
+	}
 }

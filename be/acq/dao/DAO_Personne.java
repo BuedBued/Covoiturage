@@ -24,13 +24,14 @@ public class DAO_Personne extends DAO<Personne> {
 				System.out.println("Cette personne est déjà inscrite");
 			else {
 				//Preparation de la commande SQL
-				stmt = connect.prepareStatement("INSERT INTO Personne (nom,prenom,dateNaissance,telephone,mail) "
-						+ "VALUES (?,?,?,?,?)");
+				stmt = connect.prepareStatement("INSERT INTO Personne (nom,prenom,dateNaissance,telephone,mail,mdp) "
+						+ "VALUES (?,?,?,?,?,?)");
 				stmt.setString(1, o.getNom());
 				stmt.setString(2, o.getPrenom());
 				stmt.setString(3,o.getDate());
 				stmt.setString(4, o.getTelephone());
 				stmt.setString(5, o.getEmail());
+				stmt.setString(6, o.getMDP());
 				//Execution de la commande SQL
 				stmt.executeUpdate();
 				//Récupération de l'id
@@ -99,6 +100,8 @@ public class DAO_Personne extends DAO<Personne> {
 			if(result.first()){
 				p = new Personne(result.getString("nom"),result.getString("prenom"), result.getString("dateNaissance"),
 						result.getString("telephone"), result.getString("mail"));
+				p.setId(id);
+				p.setMDP(result.getString("mdp"));
 			}
 			else
 				p = null;
@@ -131,6 +134,7 @@ public class DAO_Personne extends DAO<Personne> {
 					m.setEmail(p_mail);
 					m.setTelephone(p_tel);
 					m.setId(p_idPersonne);
+					m.setMDP(mdp);
 					return m;
 				}
 				else {
@@ -143,6 +147,7 @@ public class DAO_Personne extends DAO<Personne> {
 						r.setEmail(p_mail);
 						r.setTelephone(p_tel);
 						r.setId(p_idPersonne);
+						r.setMDP(mdp);
 						return r;
 					}
 					else {
@@ -155,12 +160,14 @@ public class DAO_Personne extends DAO<Personne> {
 							t.setEmail(p_mail);
 							t.setTelephone(p_tel);
 							t.setId(p_idPersonne);
+							t.setMDP(mdp);
 							return t;
 						}
 						else {
 							p = new Personne(result.getString("nom"),result.getString("prenom"), result.getString("dateNaissance"),
 									result.getString("telephone"), result.getString("mail"));
 							p.setId(result.getInt("idPersonne"));
+							p.setMDP(mdp);
 							return p;
 						}
 					}

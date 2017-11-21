@@ -26,14 +26,17 @@ public class M_Personne {
 			if(utilisateur.getClass().equals(Membre.class)) {
 				M_Membre m = new M_Membre();
 				m.setMembre((Membre)utilisateur);
+				//m.fonctionnalitesMembre();
 			}
 			else if (utilisateur.getClass().equals(Responsable.class)) {
 				M_Responsable r = new M_Responsable();
 				r.setResponsable((Responsable)utilisateur);
+				//r.fonctionnalitesResponsable();
 			}
 			else if (utilisateur.getClass().equals(Tresorier.class)) {
 				M_Tresorier t = new M_Tresorier();
 				t.setTresorier((Tresorier)utilisateur);
+				//t.fonctionnalitesTresorier();
 			}
 			else {
 				p = (Personne)utilisateur;
@@ -44,6 +47,35 @@ public class M_Personne {
 		else {
 			System.out.println("Erreur de connexion !");
 		}
+	}
+	
+	public void inscription() {
+		DAO_Personne dao_p = new DAO_Personne(CovoiturageCon.getInstance());
+		Personne tmp_p = encodage();
+		if(dao_p.create(tmp_p)) { //Si la personne a été créée dans la base de donnée
+			this.p = tmp_p;
+			fonctionnalitesPersonne();
+		}
+		//Sinon, il y aura un message d'erreur affiché venant de la méthode create(Personne o) de la classe DAO_Personne 
+	}
+	
+	public Personne encodage() {
+		String p_nom, p_prenom, p_date, p_tel, p_mail, p_mdp;
+		System.out.print("Nom : ");
+		p_nom = Clavier.lireString();
+		System.out.print("Prenom : ");
+		p_prenom = Clavier.lireString();
+		System.out.print("Date de naissance : ");
+		p_date = Clavier.lireString();
+		System.out.print("Numero de telephone : ");
+		p_tel = Clavier.lireString();
+		System.out.print("Adresse mail : ");
+		p_mail = Clavier.lireString();
+		System.out.print("Mot de passe : ");
+		p_mdp = Clavier.lireString();
+		Personne tp = new Personne(p_nom, p_prenom, p_date, p_tel, p_mail);
+		tp.setMDP(p_mdp);
+		return tp;
 	}
 	
 	public void fonctionnalitesPersonne() {
@@ -60,12 +92,12 @@ public class M_Personne {
 		}
 		while(choix !=1 && choix!=2);
 		if(choix ==1) {
-			DAO_Membre dao_m = new DAO_Membre(CovoiturageCon.getInstance());
-			/*M_Membre m = new M_Membre();
-			m.setMembre()*/
+			inscriptionMembre();
 		}
 	}
 	public void inscriptionMembre() {
-		
+		M_Membre m = new M_Membre();
+		m.setMembre((Membre)this.p);
+		m.inscriptionMembre();
 	}
 }
