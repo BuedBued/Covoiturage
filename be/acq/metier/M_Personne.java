@@ -15,10 +15,8 @@ public class M_Personne {
 		System.out.println("Connexion");
 		System.out.print("Nom :");
 		p_nom = Clavier.lireString();
-		System.out.println();
 		System.out.print("Prenom :");
 		p_prenom = Clavier.lireString();
-		System.out.println();
 		System.out.print("MDP :");
 		p_mdp = Clavier.lireString();
 		System.out.println();
@@ -45,9 +43,6 @@ public class M_Personne {
 				fonctionnalitesPersonne();
 			}
 				
-		}
-		else {
-			System.out.println("Erreur de connexion !");
 		}
 	}
 	
@@ -100,10 +95,18 @@ public class M_Personne {
 		if(choix ==1) {
 			devenirMembre();
 		}
+		else
+			System.out.println("Aurevoir");
 	}
 	public void devenirMembre() {
 		M_Membre m = new M_Membre();
-		m.setMembre((Membre)this.p);
+		m.setMembre(new Membre());
+		m.getMembre().setNom(p.getNom());
+		m.getMembre().setPrenom(p.getPrenom());
+		m.getMembre().setDate(p.getDate());
+		m.getMembre().setTelephone(p.getTelephone());
+		m.getMembre().setEmail(p.getEmail());
+		m.getMembre().setId(p.getId());
 		m.inscriptionMembre();
 	}
 }

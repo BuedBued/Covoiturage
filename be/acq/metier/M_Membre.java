@@ -30,7 +30,7 @@ public class M_Membre {
 			}
 		}
 		while(choix <0 || choix>limite);
-		m.setCategorie(listeCategorie.get(choix));
+		m.setCategorie(listeCategorie.get(choix-1));
 		m.setSolde(20); //Cotisation annuelle
 		if(dao_m.create(m)) {
 			fonctionnalitesMembre();
@@ -61,6 +61,9 @@ public class M_Membre {
 		}
 		else if(choix ==3) {
 			consulterCalendrier();
+		}
+		else {
+			System.out.println("Aurevoir");
 		}
 	}
 	

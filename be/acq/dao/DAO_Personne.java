@@ -118,11 +118,17 @@ public class DAO_Personne extends DAO<Personne> {
 	
 	public Personne selectFromConnection(String nom, String prenom, String mdp) {
 		Personne p;
-		try{
-			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Personne WHERE nom = " +nom+" AND "
-							+ "prenom = "+prenom+" AND mdp = "+mdp);
-			if(result.first()){
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		try {
+			//Test si la personne existe !
+			stmt = connect.prepareStatement("SELECT * FROM Personne WHERE nom = ? AND prenom = ? AND mdp = ?",
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			stmt.setString(1, nom);
+			stmt.setString(2, prenom);
+			stmt.setString(3, mdp);
+			result = stmt.executeQuery();
+			if(result.first()) {
 				String p_nom = result.getString("nom");
 				String p_prenom = result.getString("prenom");
 				String p_date = result.getString("dateNaissance");
