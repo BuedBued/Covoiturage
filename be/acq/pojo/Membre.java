@@ -19,7 +19,7 @@ public class Membre extends Personne {
 	//Getter
 	public int getIdMembre() {return this.idMembre;}
 	public double getSolde() {return this.solde;}
-	public Categorie setCategorie() {return this.cat;}
+	public Categorie getCategorie() {return this.cat;}
 	//Setter
 	public void setSolde(double solde) {this.solde = solde;}
 	public void setCategorie(Categorie cat) {this.cat = cat;}

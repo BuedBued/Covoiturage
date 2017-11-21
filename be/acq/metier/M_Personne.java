@@ -11,6 +11,8 @@ public class M_Personne {
 	public void connexion() {
 		Object utilisateur;
 		String p_nom, p_prenom, p_mdp;
+		System.out.println("******************************");
+		System.out.println("Connexion");
 		System.out.print("Nom :");
 		p_nom = Clavier.lireString();
 		System.out.println();
@@ -36,7 +38,7 @@ public class M_Personne {
 			else if (utilisateur.getClass().equals(Tresorier.class)) {
 				M_Tresorier t = new M_Tresorier();
 				t.setTresorier((Tresorier)utilisateur);
-				//t.fonctionnalitesTresorier();
+				t.fonctionnalitesTresorier();
 			}
 			else {
 				p = (Personne)utilisateur;
@@ -61,6 +63,8 @@ public class M_Personne {
 	
 	public Personne encodage() {
 		String p_nom, p_prenom, p_date, p_tel, p_mail, p_mdp;
+		System.out.println("******************************");
+		System.out.println("Inscription Personne");
 		System.out.print("Nom : ");
 		p_nom = Clavier.lireString();
 		System.out.print("Prenom : ");
@@ -80,6 +84,8 @@ public class M_Personne {
 	
 	public void fonctionnalitesPersonne() {
 		int choix;
+		System.out.println("********************************");
+		System.out.println("Bienvenue " +p.getNom() +" " +p.getPrenom());
 		System.out.println("Que voulez-vous faire?");
 		System.out.println("1. Devenir Membre");
 		System.out.println("2. Quitter");

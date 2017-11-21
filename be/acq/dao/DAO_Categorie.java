@@ -1,6 +1,7 @@
 package be.acq.dao;
 import be.acq.pojo.*;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DAO_Categorie extends DAO<Categorie>{
 	public DAO_Categorie(Connection conn){
@@ -55,5 +56,27 @@ public class DAO_Categorie extends DAO<Categorie>{
 			e.printStackTrace();
 		}
 		return c;
+	}
+	
+	public ArrayList<Categorie> selectionToutesCategories() {
+		ArrayList<Categorie> listCategorie = null;
+		PreparedStatement stmt = null;
+		ResultSet res = null;
+		try{
+			listCategorie = new ArrayList<Categorie>();
+			stmt = connect.prepareStatement("SELECT * FROM Categorie",
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			res = stmt.executeQuery();
+			while(res.next()) {
+				Categorie tmp_c = new Categorie(res.getString("nomCategorie"));
+				tmp_c.setIdCategorie(res.getInt("idCategorie"));
+				listCategorie.add(tmp_c);
+			}
+			return listCategorie;
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
