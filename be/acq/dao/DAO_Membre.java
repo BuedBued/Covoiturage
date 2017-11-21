@@ -52,7 +52,7 @@ public class DAO_Membre extends DAO<Membre>{
 			}	
 		}
 		catch(SQLException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		return b;
 	}

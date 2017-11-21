@@ -47,7 +47,7 @@ public class DAO_Personne extends DAO<Personne> {
 			}	
 		}
 		catch(SQLException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		return b;
 	}
@@ -64,7 +64,7 @@ public class DAO_Personne extends DAO<Personne> {
 			b = true;
 		}
 		catch(SQLException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		return b;
 	}
@@ -87,7 +87,7 @@ public class DAO_Personne extends DAO<Personne> {
 			b = true;
 		}
 		catch(SQLException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		return b;
 	}
