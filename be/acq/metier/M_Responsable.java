@@ -28,17 +28,17 @@ public class M_Responsable {
 			ajouterBaladeCategorie();
 		}
 		else if(choix ==2) {
-			//posterDisponibilite();
+			//calculerForfait();
 		}
 		else if(choix ==3) {
-			//consulterCalendrier();
+			//devenirMembre();
 		}
 	}
 	
 	public void ajouterBaladeCategorie() {
 		M_Categorie c = new M_Categorie();
-		c.setCategorie(r.getCategorie());
 		if(c.ajouterBaladeCalendrier()) {
+			r.setCategorie(c.getCategorie());
 			System.out.println("Balade ajoutée avec succès");
 			fonctionnalitesResponsable();
 		}

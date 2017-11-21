@@ -33,7 +33,7 @@ public class M_Membre {
 		m.setCategorie(listeCategorie.get(choix));
 		m.setSolde(20); //Cotisation annuelle
 		if(dao_m.create(m)) {
-			//Fonction membres
+			fonctionnalitesMembre();
 		}	
 	}
 	
@@ -60,7 +60,7 @@ public class M_Membre {
 			//posterDisponibilite();
 		}
 		else if(choix ==3) {
-			//consulterCalendrier();
+			consulterCalendrier();
 		}
 	}
 	
@@ -73,5 +73,16 @@ public class M_Membre {
 		else {
 			System.out.println("Erreur update Membre");
 		}
+	}
+	
+	/*public void inscriptionBalade() {
+		M_Vehicule v = new M_Vehicule();
+		v.posterDisponibilite();
+	}*/
+	
+	public void consulterCalendrier() {
+		M_Categorie c = new M_Categorie();
+		c.setCategorie(m.getCategorie());
+		c.afficherCalendrier(m);
 	}
 }

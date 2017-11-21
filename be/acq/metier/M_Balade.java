@@ -38,4 +38,16 @@ public class M_Balade {
 		b.setDate(p_dateBalade);
 		//ATTENTION : Encodage d'une balade avec la liste de véhicules vide
 	}
+	
+	public boolean inscrireVehicule(Membre m) {
+		boolean bool = false;
+		M_Vehicule v = new M_Vehicule();
+		if(v.inscriptionVehiculeBalade(m)) {
+			b.getListeVehicule().add(v.getVehicule());
+			DAO_Balade dao_b = new DAO_Balade(CovoiturageCon.getInstance());
+			if(dao_b.createCovoiturage(b, v.getVehicule()))
+				bool = true;
+		}
+		return bool;
+	}
 }

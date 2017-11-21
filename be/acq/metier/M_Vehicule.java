@@ -1,0 +1,42 @@
+package be.acq.metier;
+import be.acq.clavier.Clavier;
+import be.acq.dao.*;
+import be.acq.pojo.*;
+
+//import java.util.ArrayList;
+
+//import be.acq.clavier.*;
+public class M_Vehicule {
+	private Vehicule v;
+	//On instancie un objet DAO qui servira pour tout l'objet
+	private DAO_Vehicule dao_v = new DAO_Vehicule(CovoiturageCon.getInstance());
+	public M_Vehicule() {}
+	public Vehicule getVehicule() {return this.v;}
+	public void setVehicule(Vehicule v) {this.v = v;}
+	
+	public boolean inscriptionVehiculeBalade(Membre m) {
+		boolean b = false;
+		v = dao_v.findFromConducteur(m.getId());
+		if(v == null) {
+			encodageVehicule();
+			v.setConducteur(m);
+			if(dao_v.create(v))
+				b=true;
+		}
+		else {
+			v.setConducteur(m);
+			b = true;
+		}
+		return b;
+	}
+	
+	public void encodageVehicule() {
+		v = new Vehicule();
+		int p_maxPlace;
+		System.out.println("**************************");
+		System.out.println("Encodage véhicule");
+		System.out.print("Lieu de la balade : ");
+		p_maxPlace = Clavier.lireInt();
+		v.setPlaceMax(p_maxPlace);
+	}
+}

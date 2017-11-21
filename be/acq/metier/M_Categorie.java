@@ -22,4 +22,10 @@ public class M_Categorie {
 		}
 		return b;
 	}
+	
+	public void afficherCalendrier(Membre m) {
+		M_Calendrier cal = new M_Calendrier();
+		cal.setCalendrier(c.getCalendrier());
+		cal.afficherBalade(m);
+	}
 }
