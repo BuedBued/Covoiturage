@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import be.acq.clavier.*;
 public class M_Membre {
 	private Membre m;
+	//On instancie un objet DAO qui servira pour tout l'objet
+	private DAO_Membre dao_m = new DAO_Membre(CovoiturageCon.getInstance());
 	public M_Membre() {}
 	public Membre getMembre() {return this.m;}
 	public void setMembre(Membre m) {this.m = m;}
@@ -30,7 +32,6 @@ public class M_Membre {
 		while(choix <0 || choix>limite);
 		m.setCategorie(listeCategorie.get(choix));
 		m.setSolde(20); //Cotisation annuelle
-		DAO_Membre dao_m = new DAO_Membre(CovoiturageCon.getInstance());
 		if(dao_m.create(m)) {
 			//Fonction membres
 		}	
@@ -64,8 +65,13 @@ public class M_Membre {
 	}
 	
 	public void payerSolde() {
-		m.setSolde(0);
-		System.out.println("Solde payé");
-		fonctionnalitesMembre();
+		this.m.setSolde(0);
+		if(dao_m.update(this.m)) {
+			System.out.println("Solde payé");
+			fonctionnalitesMembre();
+		}
+		else {
+			System.out.println("Erreur update Membre");
+		}
 	}
 }

@@ -62,7 +62,23 @@ public class DAO_Membre extends DAO<Membre>{
 	}
 	
 	public boolean update(Membre obj){
-		return false;
+		boolean b = false;
+		PreparedStatement stmt = null;
+		try {
+			//Preparation de la commande SQL
+			stmt = connect.prepareStatement("UPDATE Membre SET idPersonne = ?, solde = ?"
+					+ " WHERE idMembre = ?");
+			stmt.setInt(1, obj.getId());
+			stmt.setDouble(2, obj.getSolde());
+			stmt.setInt(3, obj.getIdMembre());
+			//Execution de la commande SQL
+			stmt.executeUpdate();
+			b = true;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return b;
 	}
 	
 	public Membre find(int id) {
