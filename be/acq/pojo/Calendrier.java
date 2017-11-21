@@ -1,17 +1,17 @@
 package be.acq.pojo;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Calendrier {
-	private List<Balade> listeBalade;
+	private ArrayList<Balade> listeBalade;
 	
 	public Calendrier() {}
-	public Calendrier(List<Balade> listeBalade) {
+	public Calendrier(ArrayList<Balade> listeBalade) {
 		this.listeBalade = listeBalade;
 	}
 	
 	//Getter
-	public List<Balade> getListeBalade(){return this.listeBalade;}
+	public ArrayList<Balade> getListeBalade(){return this.listeBalade;}
 	//Setter
-	public void setListeBalade(List<Balade> listeBalade) {this.listeBalade = listeBalade;}
+	public void setListeBalade(ArrayList<Balade> listeBalade) {this.listeBalade = listeBalade;}
 }

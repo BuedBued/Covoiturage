@@ -94,14 +94,18 @@ public class DAO_Personne extends DAO<Personne> {
 	
 	public Personne find(int id){
 		Personne p = new Personne();
+		PreparedStatement stmt = null;
+		ResultSet res = null;
 		try{
-			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Personne WHERE idPersonne = " +id);
-			if(result.first()){
-				p = new Personne(result.getString("nom"),result.getString("prenom"), result.getString("dateNaissance"),
-						result.getString("telephone"), result.getString("mail"));
+			stmt = connect.prepareStatement("SELECT * FROM Personne WHERE idPersonne = ?",
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			stmt.setInt(1, id);
+			res = stmt.executeQuery();
+			if(res.first()){
+				p = new Personne(res.getString("nom"),res.getString("prenom"), res.getString("dateNaissance"),
+						res.getString("telephone"), res.getString("mail"));
 				p.setId(id);
-				p.setMDP(result.getString("mdp"));
+				p.setMDP(res.getString("mdp"));
 			}
 			else
 				p = null;

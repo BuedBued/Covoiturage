@@ -28,12 +28,12 @@ public class M_Personne {
 			if(utilisateur.getClass().equals(Membre.class)) {
 				M_Membre m = new M_Membre();
 				m.setMembre((Membre)utilisateur);
-				//m.fonctionnalitesMembre();
+				m.fonctionnalitesMembre();
 			}
 			else if (utilisateur.getClass().equals(Responsable.class)) {
 				M_Responsable r = new M_Responsable();
 				r.setResponsable((Responsable)utilisateur);
-				//r.fonctionnalitesResponsable();
+				r.fonctionnalitesResponsable();
 			}
 			else if (utilisateur.getClass().equals(Tresorier.class)) {
 				M_Tresorier t = new M_Tresorier();
@@ -98,10 +98,10 @@ public class M_Personne {
 		}
 		while(choix !=1 && choix!=2);
 		if(choix ==1) {
-			inscriptionMembre();
+			devenirMembre();
 		}
 	}
-	public void inscriptionMembre() {
+	public void devenirMembre() {
 		M_Membre m = new M_Membre();
 		m.setMembre((Membre)this.p);
 		m.inscriptionMembre();

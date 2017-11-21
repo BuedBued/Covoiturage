@@ -1,26 +1,28 @@
 package be.acq.pojo;
 
-import java.util.Date;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Balade {
-	private Date dateBalade;
-	private String adresseBalade;
-	private List<Vehicule> listeVehicule;
+	private int idBalade;
+	private String dateBalade;
+	private String lieuBalade;
+	private ArrayList<Vehicule> listeVehicule;
 	
 	public Balade() {}
-	public Balade(Date dateBalade, String adresseBalade, List<Vehicule> listeVehicule) {
+	public Balade(String dateBalade, String lieuBalade, ArrayList<Vehicule> listeVehicule) {
 		this.dateBalade = dateBalade;
-		this.adresseBalade = adresseBalade;
+		this.lieuBalade = lieuBalade;
 		this.listeVehicule = listeVehicule;
 	}
 	
 	//Getters
-	public Date getDate() {return this.dateBalade;}
-	public String getAdresse() {return this.adresseBalade;}
-	public List<Vehicule> getListeVehicule(){return this.listeVehicule;}
+	public int getIdBalade() {return this.idBalade;}
+	public String getDate() {return this.dateBalade;}
+	public String getLieu() {return this.lieuBalade;}
+	public ArrayList<Vehicule> getListeVehicule(){return this.listeVehicule;}
 	//Setters
-	public void setDate(Date dateBalade) {this.dateBalade = dateBalade;}
-	public void setAdresse(String adresseBalade) {this.adresseBalade = adresseBalade;}
-	public void setListeVehicule(List<Vehicule> listeVehicule) {this.listeVehicule = listeVehicule;}
+	public void setIdBalade(int id) {this.idBalade = id;}
+	public void setDate(String dateBalade) {this.dateBalade = dateBalade;}
+	public void setLieu(String lieuBalade) {this.lieuBalade = lieuBalade;}
+	public void setListeVehicule(ArrayList<Vehicule> listeVehicule) {this.listeVehicule = listeVehicule;}
 }

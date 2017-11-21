@@ -21,7 +21,7 @@ public class DAO_Membre extends DAO<Membre>{
 			if(res.first())
 				System.out.println("Ce membre est déjà inscrit");
 			else {
-				//Preparation de la commande SQL
+				//Insertion dans la table Membre
 				stmt = connect.prepareStatement("INSERT INTO Membre (solde,idPersonne) VALUES (?,?)");
 				stmt.setDouble(1, obj.getSolde());
 				stmt.setInt(2, obj.getId());
@@ -33,6 +33,7 @@ public class DAO_Membre extends DAO<Membre>{
 				stmt.setInt(1, obj.getId());
 				res = stmt.executeQuery();
 				if(res.first()) {
+					//Insertion dans la table LigneCategorie
 					obj.setIdMembre(res.getInt("idMembre"));
 					stmt = connect.prepareStatement("INSERT INTO LigneCategorie (idMembre,idCategorie) VALUES (?,?)");
 					stmt.setInt(1, obj.getIdMembre());
@@ -40,6 +41,7 @@ public class DAO_Membre extends DAO<Membre>{
 					//Execution de la commande SQL
 					stmt.executeUpdate();
 					if(res.first()) {
+						//Si tout est réussi
 						return b = true;
 					}
 					else {

@@ -20,6 +20,25 @@ public class DAO_Categorie extends DAO<Categorie>{
 		return false;
 	}
 	
+	public boolean updatePourBalade(Categorie obj){
+		boolean b = false;
+		int idCat = obj.getIdCategorie();
+		PreparedStatement stmt = null;
+		try {
+			//Preparation de la commande SQL
+			stmt = connect.prepareStatement("UPDATE Balade SET idCategorie = ? WHERE idCategorie = ?");
+			stmt.setInt(1, idCat);
+			stmt.setInt(2, 0);
+			//Execution de la commande SQL
+			stmt.executeUpdate();
+			b = true;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return b;
+	}
+	
 	public Categorie find(int id) {
 		Categorie c = new Categorie();
 		PreparedStatement stmt = null;
