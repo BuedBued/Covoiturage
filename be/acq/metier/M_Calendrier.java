@@ -51,8 +51,13 @@ public class M_Calendrier {
 		}
 	}
 	
-	public void afficherBaladeCovoiturage(Membre m) {
-		ArrayList<Balade> listeBalade = cal.getListeBalade();
+	public void afficherBaladeCovoiturage(Membre m, Categorie c) {
+		if(cal==null) {
+			cal = new Calendrier();
+			cal.setListeBalade(new ArrayList<Balade>());
+		}
+		M_Balade b = new M_Balade();
+		ArrayList<Balade> listeBalade = b.recupererListeBaladeCategorie(c);
 		for (int i = 0; i< listeBalade.size(); i++) {
 			System.out.println((i+1)+". Lieu : " +listeBalade.get(i).getLieu() +"       Date : "+
 		listeBalade.get(i).getDate());
@@ -69,8 +74,7 @@ public class M_Calendrier {
 		}
 		while(choix<0 || choix>listeBalade.size());
 		if (choix!=0) {
-			M_Balade b = new M_Balade();
-			b.setBalade(listeBalade.get(choix+1));
+			b.setBalade(listeBalade.get(choix-1));
 			if(b.inscrireCovoiturage(m))
 				System.out.println("Inscription covoiturage réussie");
 		}

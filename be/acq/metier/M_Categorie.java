@@ -25,8 +25,8 @@ public class M_Categorie {
 	
 	public void afficherCalendrierCovoiturage(Membre m) {
 		M_Calendrier cal = new M_Calendrier();
-		cal.setCalendrier(c.getCalendrier());
-		cal.afficherBaladeCovoiturage(m);
+		//cal.setCalendrier(c.getCalendrier());
+		cal.afficherBaladeCovoiturage(m,c);
 	}
 	
 	public void afficherCalendrier(Membre m) {

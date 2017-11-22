@@ -18,7 +18,9 @@ public class M_Vehicule {
 	
 	public boolean inscriptionVehiculeBalade(Membre m) {
 		boolean b = false;
-		v = dao_v.findFromConducteur(m.getId());
+		if(v ==null)
+			v = new Vehicule();
+		v = dao_v.findFromConducteur(m.getIdMembre());
 		if(v == null) {
 			encodageVehicule();
 			v.setConducteur(m);
@@ -58,7 +60,7 @@ public class M_Vehicule {
 					System.out.println("Erreur d'encodage");
 			}
 			while(choix<0 || choix>taille+1);
-			return listeVehicule.get(choix+1);
+			return listeVehicule.get(choix-1);
 		}
 		else
 			return null;
