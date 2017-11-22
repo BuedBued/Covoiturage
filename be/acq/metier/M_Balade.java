@@ -1,5 +1,7 @@
 package be.acq.metier;
 
+import java.util.ArrayList;
+
 import be.acq.clavier.Clavier;
 import be.acq.dao.CovoiturageCon;
 import be.acq.dao.*;
@@ -41,6 +43,8 @@ public class M_Balade {
 		boolean bool = false;
 		M_Vehicule v = new M_Vehicule();
 		if(v.inscriptionVehiculeBalade(m)) {
+			if(b.getListeVehicule()==null)
+				b.setListeVehicule(new ArrayList<Vehicule>());
 			b.getListeVehicule().add(v.getVehicule());
 			DAO_Balade dao_b = new DAO_Balade(CovoiturageCon.getInstance());
 			if(dao_b.createCovoiturage(b, v.getVehicule()))
@@ -56,5 +60,12 @@ public class M_Balade {
 		if(dao_b.inscriptionCovoiturage(b, choix, m))
 			bool = true;
 		return bool;
+	}
+	
+	public ArrayList<Balade> recupererListeBaladeCategorie(Categorie c){
+		ArrayList<Balade> retour;
+		DAO_Balade dao_b = new DAO_Balade(CovoiturageCon.getInstance());
+		retour = dao_b.selectionBaladeCategorie(c);
+		return retour;
 	}
 }

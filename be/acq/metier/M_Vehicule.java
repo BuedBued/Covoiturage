@@ -32,6 +32,16 @@ public class M_Vehicule {
 		return b;
 	}
 	
+	public void encodageVehicule() {
+		v = new Vehicule();
+		int p_maxPlace;
+		System.out.println("**************************");
+		System.out.println("Encodage véhicule");
+		System.out.print("Place maximum : ");
+		p_maxPlace = Clavier.lireInt();
+		v.setPlaceMax(p_maxPlace);
+	}
+	
 	public Vehicule selectionnerCovoiturage(Balade b) {
 		DAO_Vehicule dao_p = new DAO_Vehicule(CovoiturageCon.getInstance());
 		ArrayList<Vehicule> listeVehicule = dao_p.selectionTousVehicule(b);
@@ -52,15 +62,5 @@ public class M_Vehicule {
 		}
 		else
 			return null;
-	}
-	
-	public void encodageVehicule() {
-		v = new Vehicule();
-		int p_maxPlace;
-		System.out.println("**************************");
-		System.out.println("Encodage véhicule");
-		System.out.print("Lieu de la balade : ");
-		p_maxPlace = Clavier.lireInt();
-		v.setPlaceMax(p_maxPlace);
 	}
 }

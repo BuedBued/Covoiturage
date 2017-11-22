@@ -9,22 +9,25 @@ public class M_Responsable {
 	public void setResponsable(Responsable r) {this.r = r;}
 	
 	public void fonctionnalitesResponsable() {
-		System.out.println("****************************");
-		System.out.println("Responsable");
-		System.out.println("1. Ajouter une balade");
-		System.out.println("2. Retour");
 		int choix;
 		do {
-			System.out.print("Votre choix : ");
-			choix = Clavier.lireInt();
-			if(choix <1 || choix>4) {
-				System.out.println("Erreur encodage");
+			System.out.println("****************************");
+			System.out.println("Responsable");
+			System.out.println("1. Ajouter une balade");
+			System.out.println("2. Retour");
+			do {
+				System.out.print("Votre choix : ");
+				choix = Clavier.lireInt();
+				if(choix <1 || choix>4) {
+					System.out.println("Erreur encodage");
+				}
+			}
+			while(choix <1 || choix>2);
+			if(choix ==1) {
+				ajouterBaladeCategorie();
 			}
 		}
-		while(choix <1 || choix>2);
-		if(choix ==1) {
-			ajouterBaladeCategorie();
-		}
+		while(choix!=2);
 	}
 	
 	public void ajouterBaladeCategorie() {
@@ -32,7 +35,6 @@ public class M_Responsable {
 		c.setCategorie(r.getCategorie());
 		if(c.ajouterBaladeCalendrier()) {
 			r.setCategorie(c.getCategorie());
-			System.out.println("Balade ajoutée avec succès");
 			fonctionnalitesResponsable();
 		}
 	}

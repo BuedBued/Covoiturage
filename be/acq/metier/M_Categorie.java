@@ -15,7 +15,6 @@ public class M_Categorie {
 			//c.setCalendrier(cal.getCalendrier());
 			DAO_Categorie dao_c = new DAO_Categorie(CovoiturageCon.getInstance());
 			if(dao_c.updatePourBalade(c)) {
-				System.out.println("[DEBUG] Mise à jour catégorie de la balade");
 				b = true;
 			}
 			else
@@ -32,7 +31,7 @@ public class M_Categorie {
 	
 	public void afficherCalendrier(Membre m) {
 		M_Calendrier cal = new M_Calendrier();
-		cal.setCalendrier(c.getCalendrier());
-		cal.afficherBalade(m);
+		//cal.setCalendrier(c.getCalendrier());
+		cal.afficherBalade(m,c);
 	}
 }

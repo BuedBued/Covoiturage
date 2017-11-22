@@ -25,6 +25,8 @@ public class DAO_Vehicule extends DAO<Vehicule>{
 			stmt.setInt(1, obj.getConducteur().getIdMembre());
 			res = stmt.executeQuery();
 			if(res.first()) {
+				//Insertion de l'id dans le vehicule
+				obj.setIdVehicule(res.getInt("idVehicule"));
 				b=true;
 			}
 		}

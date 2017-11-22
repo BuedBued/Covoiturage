@@ -38,30 +38,34 @@ public class M_Membre {
 	}
 	
 	public void fonctionnalitesMembre() {
-		System.out.println("****************************");
-		System.out.println("Membre");
-		System.out.println("1. Payer son solde");
-		System.out.println("2. Chercher covoiturage");
-		System.out.println("3. Poster disponibilité");
-		System.out.println("4. Retour");
 		int choix;
 		do {
-			System.out.print("Votre choix : ");
-			choix = Clavier.lireInt();
-			if(choix <1 || choix>4) {
-				System.out.println("Erreur encodage");
+			System.out.println("****************************");
+			System.out.println("Membre");
+			System.out.println("1. Payer son solde");
+			System.out.println("2. Chercher covoiturage");
+			System.out.println("3. Poster disponibilité");
+			System.out.println("4. Retour");
+			do {
+				System.out.print("Votre choix : ");
+				choix = Clavier.lireInt();
+				System.out.println();
+				if(choix <1 || choix>4) {
+					System.out.println("Erreur encodage");
+				}
+			}
+			while(choix <1 || choix>4);
+			if(choix ==1) {
+				payerSolde();
+			}
+			else if(choix ==2) {
+				chercherCovoiturage();
+			}
+			else if(choix ==3) {
+				consulterCalendrier();
 			}
 		}
-		while(choix <1 || choix>4);
-		if(choix ==1) {
-			payerSolde();
-		}
-		else if(choix ==2) {
-			chercherCovoiturage();
-		}
-		else if(choix ==3) {
-			consulterCalendrier();
-		}
+		while(choix!=4);
 	}
 	
 	public void payerSolde() {

@@ -117,11 +117,25 @@ public class DAO_Membre extends DAO<Membre>{
 		Membre m = null;
 		try{
 			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Membre WHERE idPersonne = " +id);
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Membre m INNER JOIN LigneCategorie l ON "
+							+ "L.idMembre = m.idMembre INNER JOIN Categorie c ON c.idCategorie = l.idCategorie WHERE "
+							+ "idPersonne = " +id);
 			if(result.first()){
 				m = new Membre();
 				m.setSolde(result.getDouble("solde"));
 				m.setIdMembre(result.getInt("idMembre"));
+				String nomCategorie = result.getString("nomCategorie");
+				if (nomCategorie.equals("Cyclo"))
+					m.setCategorie(new Cyclo());
+				else if(nomCategorie.equals("VTT"))
+					m.setCategorie(new VTT());
+				else if (nomCategorie.equals("Trialiste"))
+					m.setCategorie(new Trialiste());
+				else if (nomCategorie.equals("Randonneur"))
+					m.setCategorie(new Randonneur());
+				else
+					m.setCategorie(new Descente());
+				m.getCategorie().setIdCategorie(result.getInt("idCategorie"));
 			}
 		}
 		catch(SQLException e){

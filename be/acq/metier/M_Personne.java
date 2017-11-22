@@ -90,6 +90,7 @@ public class M_Personne {
 		do {
 			System.out.print("Votre choix : ");
 			choix = Clavier.lireInt();
+			System.out.println();
 			if(choix !=1 && choix!=2) {
 				System.out.println("Erreur encodage");
 			}

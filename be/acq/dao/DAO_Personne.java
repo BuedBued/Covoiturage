@@ -147,6 +147,7 @@ public class DAO_Personne extends DAO<Personne> {
 					m.setTelephone(p_tel);
 					m.setId(p_idPersonne);
 					m.setMDP(mdp);
+					//m.setCategorie();
 					return m;
 				}
 				else {

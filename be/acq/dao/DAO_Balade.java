@@ -1,6 +1,7 @@
 package be.acq.dao;
 import be.acq.pojo.*;
 import java.sql.*;
+import java.util.ArrayList;
 public class DAO_Balade extends DAO<Balade>{
 	public DAO_Balade(Connection conn){
 		super(conn);
@@ -21,6 +22,31 @@ public class DAO_Balade extends DAO<Balade>{
 	//Non utilisée
 	public Balade find(int id) {
 		return null;
+	}
+	
+	public ArrayList<Balade> selectionBaladeCategorie(Categorie c){
+		ArrayList<Balade> listBalade = null;
+		PreparedStatement stmt = null;
+		ResultSet res = null;
+		try{
+			listBalade = new ArrayList<Balade>();
+			stmt = connect.prepareStatement("SELECT * FROM Balade WHERE idCategorie = ?",
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			stmt.setInt(1, c.getIdCategorie());
+			res = stmt.executeQuery();
+			while(res.next()) {
+				Balade tmp_b = new Balade();
+				tmp_b.setDate(res.getString("dateBalade"));
+				tmp_b.setIdBalade(res.getInt("idBalade"));
+				tmp_b.setLieu(res.getString("lieuBalade"));
+				listBalade.add(tmp_b);
+			}
+			return listBalade;
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public boolean createBalade(Balade obj, Categorie c) {
@@ -114,9 +140,10 @@ public class DAO_Balade extends DAO<Balade>{
 				System.out.println("Ce covoiturage existe déjà");
 			else {
 				//Preparation de la commande SQL
-				stmt = connect.prepareStatement("INSERT INTO LigneCovoiturage (idBalade,idVehicule) VALUES (?,?)");
+				stmt = connect.prepareStatement("INSERT INTO LigneCovoiturage (idBalade,idVehicule,idMembre) VALUES (?,?,?)");
 				stmt.setInt(1, b.getIdBalade());
 				stmt.setInt(2, v.getIdVehicule());
+				stmt.setInt(3, v.getConducteur().getIdMembre());
 				//Execution de la commande SQL
 				stmt.executeUpdate();
 			}
