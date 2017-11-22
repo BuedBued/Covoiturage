@@ -11,13 +11,11 @@ public class M_Balade {
 	public Balade getBalade() {return this.b;}
 	public void setBalade(Balade b) {this.b = b;}
 	
-	public boolean creerBalade() {
+	public boolean creerBalade(Categorie c) {
 		DAO_Balade dao_b = new DAO_Balade(CovoiturageCon.getInstance());
 		encodageBalade();
-		if(dao_b.create(b)) {
-			System.out.println("Balade encodée");
+		if(dao_b.createBalade(b,c))
 			return true;
-		}
 		else {
 			System.out.println("Erreur encodage Balade");
 			return false;

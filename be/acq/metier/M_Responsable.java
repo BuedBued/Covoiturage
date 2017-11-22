@@ -12,31 +12,24 @@ public class M_Responsable {
 		System.out.println("****************************");
 		System.out.println("Responsable");
 		System.out.println("1. Ajouter une balade");
-		//System.out.println("2. Calculer forfait");
-		//System.out.println("3. Devenir membre");
-		System.out.println("4. Quitter");
+		System.out.println("2. Retour");
 		int choix;
 		do {
-			System.out.print("Votre choix :");
+			System.out.print("Votre choix : ");
 			choix = Clavier.lireInt();
 			if(choix <1 || choix>4) {
 				System.out.println("Erreur encodage");
 			}
 		}
-		while(choix <1 || choix>4);
+		while(choix <1 || choix>2);
 		if(choix ==1) {
 			ajouterBaladeCategorie();
-		}
-		else if(choix ==2) {
-			//calculerForfait();
-		}
-		else if(choix ==3) {
-			//devenirMembre();
 		}
 	}
 	
 	public void ajouterBaladeCategorie() {
 		M_Categorie c = new M_Categorie();
+		c.setCategorie(r.getCategorie());
 		if(c.ajouterBaladeCalendrier()) {
 			r.setCategorie(c.getCategorie());
 			System.out.println("Balade ajoutée avec succès");

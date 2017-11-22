@@ -10,8 +10,9 @@ public class M_Categorie {
 	public boolean ajouterBaladeCalendrier() {
 		boolean b = false;
 		M_Calendrier cal = new M_Calendrier();
-		if(cal.ajouterBalade()) {
-			c.setCalendrier(cal.getCalendrier());
+		cal.setCalendrier(c.getCalendrier());
+		if(cal.ajouterBalade(c)) {
+			//c.setCalendrier(cal.getCalendrier());
 			DAO_Categorie dao_c = new DAO_Categorie(CovoiturageCon.getInstance());
 			if(dao_c.updatePourBalade(c)) {
 				System.out.println("[DEBUG] Mise à jour catégorie de la balade");

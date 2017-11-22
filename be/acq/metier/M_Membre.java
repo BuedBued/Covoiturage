@@ -43,10 +43,10 @@ public class M_Membre {
 		System.out.println("1. Payer son solde");
 		System.out.println("2. Chercher covoiturage");
 		System.out.println("3. Poster disponibilité");
-		System.out.println("4. Quitter");
+		System.out.println("4. Retour");
 		int choix;
 		do {
-			System.out.print("Votre choix :");
+			System.out.print("Votre choix : ");
 			choix = Clavier.lireInt();
 			if(choix <1 || choix>4) {
 				System.out.println("Erreur encodage");
@@ -61,9 +61,6 @@ public class M_Membre {
 		}
 		else if(choix ==3) {
 			consulterCalendrier();
-		}
-		else {
-			System.out.println("Aurevoir");
 		}
 	}
 	

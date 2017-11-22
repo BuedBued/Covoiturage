@@ -20,10 +20,14 @@ public class DAO_Tresorier extends DAO<Tresorier>{
 	
 	public Tresorier find(int id) {
 		Tresorier m = null;
-		try{
-			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Tresorier t INNER JOIN Personne p ON "
-							+ "p.idPersonne = t.idPersonne WHERE idTresorier = " +id);
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		try {
+			stmt = connect.prepareStatement("SELECT * FROM Tresorier t INNER JOIN Personne p ON "
+					+ "p.idPersonne = t.idPersonne WHERE idTresorier = ?",
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			stmt.setInt(1, id);
+			result = stmt.executeQuery();
 			if(result.first()){
 				m = new Tresorier();
 				m.setIdTresorier(result.getInt("idTresorier"));
@@ -42,9 +46,13 @@ public class DAO_Tresorier extends DAO<Tresorier>{
 	}
 	public Tresorier findFromIdPersonne(int id) {
 		Tresorier m = null;
-		try{
-			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Tresorier WHERE idPersonne = " +id);
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		try {
+			stmt = connect.prepareStatement("SELECT * FROM Tresorier WHERE idPersonne = ?",
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			stmt.setInt(1, id);
+			result = stmt.executeQuery();
 			if(result.first()){
 				m = new Tresorier();
 				m.setIdTresorier(result.getInt("idTresorier"));

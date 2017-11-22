@@ -22,12 +22,18 @@ public class DAO_Responsable extends DAO<Responsable>{
 	}
 	public Responsable findFromIdPersonne(int id) {
 		Responsable m = null;
+		PreparedStatement stmt = null;
+		ResultSet result = null;
 		try{
-			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Responsable WHERE idPersonne = " +id);
+			stmt = connect.prepareStatement("SELECT * FROM Responsable r INNER JOIN Categorie c ON r.idCategorie = "
+					+ "c.idCategorie WHERE idPersonne = ?",ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			stmt.setInt(1,id);
+			result= stmt.executeQuery();
 			if(result.first()){
 				m = new Responsable();
 				m.setIdResponsable(result.getInt("idResponsable"));
+				m.setCategorie(new Categorie(result.getString("nomCategorie")));
+				m.getCategorie().setIdCategorie(result.getInt("idCategorie"));
 			}
 		}
 		catch(SQLException e){

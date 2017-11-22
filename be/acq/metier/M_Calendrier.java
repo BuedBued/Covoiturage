@@ -8,14 +8,17 @@ public class M_Calendrier {
 	public M_Calendrier() {}
 	public Calendrier getCalendrier() {return this.cal;}
 	public void setCalendrier(Calendrier cal) {this.cal = cal;}
-	public boolean ajouterBalade() {
+	
+	public boolean ajouterBalade(Categorie c) {
 		boolean res = false;
 		M_Balade mb = new M_Balade();
-		if(mb.creerBalade()) {
-			if (cal.getListeBalade()==null)
+		if(mb.creerBalade(c)){
+			if (cal==null) {
+				cal = new Calendrier();
 				cal.setListeBalade(new ArrayList<Balade>());
-			cal.getListeBalade().add(mb.getBalade());
-			res =true;
+			}
+				cal.getListeBalade().add(mb.getBalade());
+				res =true;
 		}
 		return res;
 	}

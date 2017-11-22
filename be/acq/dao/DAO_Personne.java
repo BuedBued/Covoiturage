@@ -14,10 +14,11 @@ public class DAO_Personne extends DAO<Personne> {
 		ResultSet res = null;
 		try {
 			//Test si la personne existe !
-			stmt = connect.prepareStatement("SELECT idPersonne FROM Personne WHERE nom = ? AND prenom = ?",
-					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			stmt = connect.prepareStatement("SELECT idPersonne FROM Personne WHERE nom = ? AND prenom = ? AND "
+					+ "dateNaissance = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			stmt.setString(1, o.getNom());
 			stmt.setString(2, o.getPrenom());
+			stmt.setString(3, o.getDate());
 			res = stmt.executeQuery();
 			//Si elle existe => Envoie d'un message dans la console et pas de création
 			if(res.first())
@@ -41,6 +42,7 @@ public class DAO_Personne extends DAO<Personne> {
 				stmt.setString(2, o.getPrenom());
 				res = stmt.executeQuery();
 				if(res.first()) {
+					//Injection dans l'objet
 					o.setId(res.getInt("idPersonne"));
 					b = true;
 				}
@@ -158,6 +160,7 @@ public class DAO_Personne extends DAO<Personne> {
 						r.setTelephone(p_tel);
 						r.setId(p_idPersonne);
 						r.setMDP(mdp);
+						//r.setCategorie();
 						return r;
 					}
 					else {

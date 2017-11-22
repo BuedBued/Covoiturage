@@ -13,11 +13,11 @@ public class M_Personne {
 		String p_nom, p_prenom, p_mdp;
 		System.out.println("******************************");
 		System.out.println("Connexion");
-		System.out.print("Nom :");
+		System.out.print("Nom : ");
 		p_nom = Clavier.lireString();
-		System.out.print("Prenom :");
+		System.out.print("Prenom : ");
 		p_prenom = Clavier.lireString();
-		System.out.print("MDP :");
+		System.out.print("MDP : ");
 		p_mdp = Clavier.lireString();
 		System.out.println();
 		DAO_Personne dao_p = new DAO_Personne(CovoiturageCon.getInstance());
@@ -43,6 +43,9 @@ public class M_Personne {
 				fonctionnalitesPersonne();
 			}
 				
+		}
+		else {
+			System.out.println("Connexion ratée. Réessayé ! ");
 		}
 	}
 	
@@ -83,9 +86,9 @@ public class M_Personne {
 		System.out.println("Bienvenue " +p.getNom() +" " +p.getPrenom());
 		System.out.println("Que voulez-vous faire?");
 		System.out.println("1. Devenir Membre");
-		System.out.println("2. Quitter");
+		System.out.println("2. Retour");
 		do {
-			System.out.print("Votre choix :");
+			System.out.print("Votre choix : ");
 			choix = Clavier.lireInt();
 			if(choix !=1 && choix!=2) {
 				System.out.println("Erreur encodage");
@@ -95,8 +98,6 @@ public class M_Personne {
 		if(choix ==1) {
 			devenirMembre();
 		}
-		else
-			System.out.println("Aurevoir");
 	}
 	public void devenirMembre() {
 		M_Membre m = new M_Membre();
