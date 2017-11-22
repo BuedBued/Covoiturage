@@ -11,22 +11,26 @@ public class M_Tresorier {
 	public void setTresorier(Tresorier t) {this.t = t;}
 	
 	public void fonctionnalitesTresorier() {
-		System.out.println("****************************");
-		System.out.println("Tresorier");
-		System.out.println("1. Consulter les dettes");
-		System.out.println("2. Quitter");
 		int choix;
 		do {
-			System.out.print("Votre choix :");
-			choix = Clavier.lireInt();
-			if(choix !=1 && choix!=2) {
-				System.out.println("Erreur encodage");
+			System.out.println("****************************");
+			System.out.println("Tresorier");
+			System.out.println("1. Consulter les dettes");
+			System.out.println("2. Quitter");
+			
+			do {
+				System.out.print("Votre choix : ");
+				choix = Clavier.lireInt();
+				if(choix !=1 && choix!=2) {
+					System.out.println("Erreur encodage");
+				}
+			}
+			while(choix !=1 && choix!=2);
+			if(choix ==1) {
+				consulterDette();
 			}
 		}
-		while(choix !=1 && choix!=2);
-		if(choix ==1) {
-			consulterDette();
-		}
+		while(choix !=2);
 	}
 	
 	public void consulterDette() {
